@@ -14,7 +14,12 @@ When done, make sure to exit out of the 'grunt' process (Ctrl-C).
 
 The default test data directory is [thisrepo]/test/data. Change this with the pre-install script.
 
-Note for actual production, this repo should be installed in the application directory. The data directory should be in the data directory.
+Note for actual production, this repo should be installed in the application directory. The data directory should be in a separate directory.
 
-To add destination servers, rerun pre-install OR create the incoming.newServer directory and add that line to .build/src/conf/config.ini
+To test with a live version of the DYFI questionnaire,
+1. download the earthquake-eventpages repository, then 'npm install'
+2. run src/lib/pre-install. For 'DYFI_RESPONSE_URL' enter the response port (i.e. http://localhost:8880/dyfi/index.php)
+3. For Safari, make sure Develop->Disable ... Restrictions is on
+4. Run grunt
+5. Navigate to the DYFI form, and test from there.
 

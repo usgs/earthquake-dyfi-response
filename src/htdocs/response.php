@@ -5,6 +5,19 @@ include_once 'inc/response.inc.php';
 // defines the $CONFIG hash of configuration variables
 include_once '../conf/config.inc.php';
 
+if (!isset($ini)) {
+
+	// Process the ini filefile for directory locations and 
+	// credentials to the ArcGISOnline server.
+
+	$ini = parse_ini_file('../conf/config.ini');
+	$data_dir = $ini['WRITE_DIR'];
+	$log_dir = "$data_dir/log";
+}
+        
+$rawData = file_get_contents("php://input");
+file_put_contents("$log_dir/raw.input",$rawData);
+
 if (!isset($TEMPLATE)) {
 
   $TITLE = 'DYFI Questionnaire Result v{{VERSION}}';
@@ -31,21 +44,28 @@ if (!isset($_POST['fldSituation_felt'])) {
 	;
 }
 
+// Fix PHP not parsing multiple checkboxes
+
+$d_text = array();
+foreach (explode('&',$rawData) as $string) {
+        list($key,$val)=explode('=',$string);
+        if ($key != 'd_text') {
+                continue;
+        }
+        $d_text[] = $val;
+}
+
+if ($d_text) {
+  $_POST['d_text'] = implode(' ',$d_text);
+}
+
 // only process form once
-if (!isset($ini)) {
-
-	// Process the ini filefile for directory locations and 
-	// credentials to the ArcGISOnline server.
-
-	$ini = parse_ini_file('../conf/config.ini');
-
+if ($ini) {
 	$client_id= $ini['ARCGIS_CLIENT_ID'];
 	$client_secret = $ini['ARCGIS_CLIENT_SECRET'];
 
 	$server = $ini['SERVER_SHORTNAME'];
-	$data_dir = $ini['DATA_DIR'];
-	$log_dir = $ini['LOG_DIR'];
-        
+
         $incoming_dir = $data_dir . "/incoming";
 
 	$eventid = eventid();
@@ -155,7 +175,6 @@ if (!isset($ini)) {
 	';
 
 } // if (!isset($TEMPLATE))
-
 
 $data = $_POST;
 $data['server'] = $server;

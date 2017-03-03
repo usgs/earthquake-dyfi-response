@@ -7,13 +7,16 @@ if (!isset($TEMPLATE)) {
   // defines the $CONFIG hash of configuration variables
   include_once '../conf/config.inc.php';
 
-  $TITLE = 'DYFI Responses v{{VERSION}}';
+  $TITLE = 'DYFI Responses Example Index';
   $HEAD = '<link rel="stylesheet" href="css/index.css"/>';
   $FOOT = '<script src="js/index.js"></script>';
 
   include 'template.inc.php';
 }
 
+$ini = parse_ini_file('../src/conf/config.ini');
+$RESPONSE = $ini['TEST_RESPONSE_URL']; 
+$formlink = "<form action = '$RESPONSE' method='POST'>\n";
 ?>
 
 <div id="application">
@@ -25,13 +28,13 @@ if (!isset($TEMPLATE)) {
 </div>
 
 <p>Test blank form:
-<form action='response.php' method='post'>
+<?php echo $formlink; ?>
 <input type="submit" name="ciim_report" value="Submit Form">
 </form>
 </p>
 
 <p>Test partial form:
-<form action="response.php" method="post">
+<?php echo $formlink; ?>
 <input type="hidden" name="ciim_mapLat" value="33.5001">
 <input type="hidden" name="ciim_mapLon" value="-116.2301">
 <input type="hidden" name="form_version" value="1.3">
@@ -41,7 +44,7 @@ if (!isset($TEMPLATE)) {
 </form></p>
 
 <p>Test fully completed form:
-<form action="response.php" method="post">
+<?php echo $formlink; ?>
 <input type="hidden" name="ciim_mapLat" value="33.5001">
 <input type="hidden" name="ciim_mapLon" value="-116.2301">
 <input type="hidden" name="ciim_mapConfidence" value="4">
@@ -65,5 +68,4 @@ if (!isset($TEMPLATE)) {
 <input type="submit" name="ciim_report" value="Submit Form">
 </form></p>
 
-<a href="testform.php">Go to test form.</a>
 

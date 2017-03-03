@@ -37,8 +37,9 @@ INSTALLATION AND CONFIGURATION
 
 This subsytem should be installed in each "target" or response server for the DYFI Questionnaire. Setup requires the following locations:
 
-- [apps]/earthquake-dyfi-response. Executables go here. 
-- [data]/earthquake-dyfi-response. Incoming entry files and replicated data go here. Ensure that it has sufficient file space.
+
+- An 'apps' directory, [apps]/earthquake-dyfi-response. Executables go here. 
+- A 'data' directory, [data]/earthquake-dyfi-response. Incoming entry files, replication directories, and logs go here. Ensure that it has sufficient file space.
 
 1. Clone this repository into your apps directory:
     - [apps]/earthquake-dyfi-response

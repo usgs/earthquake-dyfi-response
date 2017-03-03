@@ -1,6 +1,7 @@
 <?php
 
-$REPO_DIR = 'my_repos/earthquake-dyfi-response';
+// Assumes this file is in [reponame]/src/lib/
+$REPO_DIR = dirname(dirname(__DIR__)); 
 
 // This data structure allows for simple configuration prompts
 $PROMPTS = array(
@@ -20,14 +21,9 @@ $PROMPTS = array(
     'default' => 'dev',
     'secure' => false
   ),
-  'DATA_DIR' => array(
-    'prompt' => 'directory to write incoming dirs',
+  'WRITE_DIR' => array(
+    'prompt' => 'directory to write incoming and log directories',
     'default' => $REPO_DIR . '/test/data',
-    'secure' => false
-  ),
-  'LOG_DIR' => array(
-    'prompt' => 'directory to write logs and a copy of the latest entry',
-    'default' => $REPO_DIR . '/test/log',
     'secure' => false
   ),
   'ARCGIS_CLIENT_ID' => array(
@@ -43,9 +39,13 @@ $PROMPTS = array(
   'BACKEND_SERVERS' => array(
     'prompt' => 'Comma-delimited list of backend servers',
     'default' => 'backendserver1.gov,backendserver2.gov',
-    'secure' => true
+    'secure' => false
   ),
-    
+  'TEST_RESPONSE_URL' => array(
+    'prompt' => 'Destination for testing response.php',
+    'default' => 'http://localhost:8880/response.php',
+    'secure' => false
+  ),
 );
 
 
@@ -131,14 +131,14 @@ function createdir ($dir) {
   if (!is_dir($dir)) {
     echo "Creating directory $dir\n";
     mkdir($dir, 0777, true);
+    chmod($dir,0777);
   }
 }
 
-createdir($CONFIG['LOG_DIR']);
-
-$datadir = $CONFIG['DATA_DIR'];
+$datadir = $CONFIG['WRITE_DIR'];
 createdir($datadir);
 createdir("$datadir/incoming");
+createdir("$datadir/log");
 
 $servers = explode(',',$CONFIG['BACKEND_SERVERS']);
 

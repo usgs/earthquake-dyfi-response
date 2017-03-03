@@ -95,9 +95,20 @@
                      '_porch', '_majormodernchim', '_tiltedwall' ),
     );
 
-    if (!isset($_POST['d_text[]']) ) return 0;
-
-    $text = $_POST['d_text[]'];
+    if (array_key_exists('d_text[]',$_POST)) {
+      // d_text is an array
+      $text = $_POST['d_text[]'];
+    }
+    elseif (array_key_exists('d_text',$_POST)) {
+      // d_text might be array or string
+      $text = $_POST['d_text'];
+      if (!is_array($text)) {
+        $text = explode(' ',$text);
+      }
+    }
+    else {
+      return 0;
+    }
     if (in_array('none',$text)) return 0;
 
     foreach(array_reverse($D_LABEL) as $dam => $vals) {
