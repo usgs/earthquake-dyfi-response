@@ -53,7 +53,8 @@ foreach (explode('&',$rawData) as $string) {
         $d_text[] = $val;
 }
 if ($d_text) {
-  $_POST['d_text'] = implode(' ',$d_text);
+  $_POST['d_text[]'] = implode('&d_text[]=', $d_text);
+  unset($_POST['d_text']); // dont repeat the $_POST variable
 }
 
 // Main loop
