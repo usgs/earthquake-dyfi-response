@@ -43,18 +43,8 @@ if (!isset($_POST['fldSituation_felt'])) {
 }
 
 // Fix PHP not parsing multiple checkboxes
-
-$d_text = array();
-foreach (explode('&',$rawData) as $string) {
-        list($key,$val)=explode('=',$string);
-        if ($key != 'd_text') {
-                continue;
-        }
-        $d_text[] = $val;
-}
-if ($d_text) {
-  $_POST['d_text'] = implode(' ',$d_text);
-}
+$_POST['d_text[]'] = $_POST['d_text'];
+unset($_POST['d_text']); // dont repeat the $_POST variable
 
 // Main loop
 
@@ -91,7 +81,7 @@ $post = array();
 if (is_array($_POST)) {
 	foreach ($_POST as $k=>$v) {
 		if (is_array($v)) {
-			$post[] = "$k=" . implode(' ',$v);
+			$post[] = "$k=" . implode('&' . $k .'=',$v);
 		} else {
 			$post[] = "$k=$v";
 		}
