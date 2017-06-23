@@ -62,7 +62,9 @@ $formlink = "<form action = '$RESPONSE' method='POST'>\n";
 <input type="hidden" name="fldExperience_response" value="ran_outside">
 <input type="hidden" name="fldExperience_stand" value="1">
 <input type="hidden" name="fldEffects_shelved" value="1 few_toppled_or_fell">
-<input type="hidden" name="d_text" value="_tiltedwall">
+<input type="hidden" name="d_text[]" value="_tilesfell">
+<input type="hidden" name="d_text[]" value="_tiltedwall">
+<input type="hidden" name="d_text[]" value="_majoroldchim">
 <input type="hidden" name="fldEffects_furniture" value="1">
 <input type="hidden" name="fldContact_comments" value="a test comment">
 <input type="submit" name="ciim_report" value="Submit Form">
