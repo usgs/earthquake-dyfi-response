@@ -213,7 +213,7 @@
 
   // generate error response in html or json
   function generateError ($format, $basename) {
-    $email = 'gs-haz_dev_team_group@usgs.gov';
+    $email = 'gs-haz_dyfi_operator@usgs.gov';
     $subject = urlencode('Error Processing DYFI Form ' . $basename);
     $message = "Something went wrong, please " .
         "<a href=\"mailto:${email}?subject=${subject}\">contact us</a> to report this " .
