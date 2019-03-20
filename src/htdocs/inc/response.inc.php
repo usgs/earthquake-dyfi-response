@@ -86,14 +86,14 @@
 
   function dtext2damage() {
     $D_LABEL = array (
-      0.5  => array( '_crackmin', '_crackwindows' ),
-      0.75 => array( '_crackwallfew' ),
-      1    => array( '_crackwallmany', '_crackwall','_crackfloor',
-                     '_crackchim', '_tilesfell' ),
-      2    => array( '_wall', '_pipe', '_win', '_brokenwindows',
-                     '_majoroldchim', '_masonryfell' ),
-      3    => array( '_move', '_chim', '_found', '_collapse',
+      3 => array( '_move', '_chim', '_found', '_collapse',
                      '_porch', '_majormodernchim', '_tiltedwall' ),
+      2 => array( '_wall', '_pipe', '_win', '_brokenwindows',
+                     '_majoroldchim', '_masonryfell' ),
+      1 => array( '_crackwallmany', '_crackwall','_crackfloor',
+                     '_crackchim', '_tilesfell' ),
+      0.75 => array( '_crackwallfew' ),
+      0.5 => array( '_crackmin', '_crackwindows' )
     );
 
     if (array_key_exists('d_text[]',$_POST)) {
@@ -112,7 +112,7 @@
     }
     if (in_array('none',$text)) return 0;
 
-    foreach(array_reverse($D_LABEL) as $dam => $vals) {
+    foreach($D_LABEL as $dam => $vals) {
       foreach($vals as $val) {
         if (in_array($val,$text)) return $dam;
       }
