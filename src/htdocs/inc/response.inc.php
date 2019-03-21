@@ -104,6 +104,7 @@
       // d_text might be array or string
       $text = $_POST['d_text'];
       if (!is_array($text)) {
+        // check for either a space, or a comma delimiter
         if (strpos($text, ' ')) {
           $text = explode(' ', $text);
         } else {
