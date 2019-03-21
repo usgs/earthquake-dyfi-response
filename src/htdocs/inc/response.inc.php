@@ -104,7 +104,11 @@
       // d_text might be array or string
       $text = $_POST['d_text'];
       if (!is_array($text)) {
-        $text = explode(' ',$text);
+        if (strpos($text, ' ')) {
+          $text = explode(' ', $text);
+        } else {
+          $text = explode(',',$text);
+        }
       }
     }
     else {
@@ -114,10 +118,10 @@
 
     foreach($D_LABEL as $dam => $vals) {
       foreach($vals as $val) {
-        if (in_array($val,$text)) return $dam;
+        if (in_array($val,$text)) {
+          return $dam; }
       }
     }
-
     return 0;
   }
 
