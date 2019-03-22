@@ -115,7 +115,7 @@
     else {
       return 0;
     }
-    if (in_array('none',$text)) return 0;
+    if (in_array('_none',$text)) return 0;
 
     foreach($D_LABEL as $dam => $vals) {
       foreach($vals as $val) {
