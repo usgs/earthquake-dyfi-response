@@ -1,6 +1,6 @@
 {
   "name": "earthquake-dyfi-response",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Subsystem of DYFI that handles collection of user entries from the web interface.",
   "repository": {
     "type": "git",
